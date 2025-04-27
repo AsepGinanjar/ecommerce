@@ -572,7 +572,7 @@ def home():
                     <div class="developer-info">
                         <span>Dibuat oleh: {{ developer_name }} ({{ developer_nrp }})</span>
                     </div>
-                    <h1>Selamat Datang di Toko ASHAP GANTENG PISAN</h1>
+                    <h1>Selamat Datang di Toko ASHAP </h1>
                     <p>Produk ASHAP.</p>
                 </div>
             </section>
