@@ -705,7 +705,7 @@ def home():
                     </div>
                     
                     <div class="footer-bottom">
-                        <p>&copy; {{ current_year }} ASHAP | Dibuat oleh <span class="developer">{{ developer_name }} ({{ developer_nrp }})</span></p>
+                        <p>&copy; {{ current_year }} AAAAA | Dibuat oleh <span class="developer">{{ developer_name }} ({{ developer_nrp }})</span></p>
                     </div>
                 </div>
             </footer>
