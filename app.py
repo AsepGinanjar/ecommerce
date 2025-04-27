@@ -710,8 +710,8 @@ def home():
 @app.route('/add')
 def add_product_form():
     # Developer info
-    developer_name = "Davney Restra Danaz"
-    developer_nrp = "152022069"
+    developer_name = "Asep Ginanjar"
+    developer_nrp = "152022041"
     
     html = '''
     <!DOCTYPE html>
