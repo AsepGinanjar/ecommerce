@@ -573,7 +573,7 @@ def home():
                         <span>Dibuat oleh: {{ developer_name }} ({{ developer_nrp }})</span>
                     </div>
                     <h1>Selamat Datang di Toko ASHAP GANTENG</h1>
-                    <p>Temukan produk berkualitas dengan harga terbaik untuk semua kebutuhan Anda.</p>
+                    <p>Produk ASHAP.</p>
                 </div>
             </section>
             
