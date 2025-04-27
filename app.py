@@ -45,7 +45,7 @@ def home():
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Shop - Toko Online Modern</title>
+            <title>SHAP - TOKO ONLINE ASHAP</title>
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
             <style>
@@ -531,7 +531,7 @@ def home():
             <nav class="navbar">
                 <div class="container navbar-container">
                     <div class="brand">
-                        <a href="/" class="logo">Shop</a>
+                        <a href="/" class="logo">ASHAP</a>
                     </div>
                     
                     <ul class="nav-menu">
@@ -555,7 +555,7 @@ def home():
                     <div class="developer-info">
                         <span>Dibuat oleh: {{ developer_name }} ({{ developer_nrp }})</span>
                     </div>
-                    <h1>Selamat Datang di Shop</h1>
+                    <h1>Selamat Datang di Toko ASHAP</h1>
                     <p>Temukan produk berkualitas dengan harga terbaik untuk semua kebutuhan Anda.</p>
                 </div>
             </section>
@@ -602,7 +602,7 @@ def home():
             <!-- Features Section -->
             <section id="features" class="features">
                 <div class="container">
-                    <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;"><i class="fas fa-star"></i> Kenapa Belanja di Shop?</h2>
+                    <h2 class="section-title" style="text-align: center; margin-bottom: 3rem;"><i class="fas fa-star"></i> Kenapa Belanja di ASHAP?</h2>
                     
                     <div class="features-grid">
                         <div class="feature-card">
@@ -645,7 +645,7 @@ def home():
                 <div class="container">
                     <div class="footer-content">
                         <div class="footer-column">
-                            <h3>Shop</h3>
+                            <h3>SHAP</h3>
                             <p class="footer-text">Toko online terpercaya yang menyediakan berbagai produk berkualitas dengan harga terbaik.</p>
                             <div class="social-links">
                                 <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
@@ -688,7 +688,7 @@ def home():
                     </div>
                     
                     <div class="footer-bottom">
-                        <p>&copy; {{ current_year }} Shop | UTS Cloud Computing | Dibuat oleh <span class="developer">{{ developer_name }} ({{ developer_nrp }})</span></p>
+                        <p>&copy; {{ current_year }} ASHAP | Dibuat oleh <span class="developer">{{ developer_name }} ({{ developer_nrp }})</span></p>
                     </div>
                 </div>
             </footer>
@@ -719,7 +719,7 @@ def add_product_form():
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tambah Produk Baru - Shop</title>
+        <title>Tambah Produk Baru - ASHAP</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
         <style>
@@ -922,7 +922,7 @@ def add_product_form():
         <!-- Navbar -->
         <nav class="navbar">
             <div class="container navbar-container">
-                <a href="/" class="logo">Shop</a>
+                <a href="/" class="logo">ASHAP</a>
                 <a href="/" class="back-link"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
             </div>
         </nav>
@@ -964,7 +964,7 @@ def add_product_form():
             </div>
             
             <div class="footer">
-                <p>&copy; {{ current_year }} Shop | UTS Cloud Computing | Dibuat oleh <span class="developer">{{ developer_name }} ({{ developer_nrp }})</span></p>
+                <p>&copy; {{ current_year }} ASHAP | Dibuat oleh <span class="developer">{{ developer_name }} ({{ developer_nrp }})</span></p>
             </div>
         </div>
     </body>
