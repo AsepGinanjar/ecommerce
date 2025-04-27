@@ -2,8 +2,25 @@ from flask import Flask, render_template_string, request, redirect, url_for
 import pymysql
 import sys
 from datetime import datetime
+import boto3
+import uuid
+import requests  # Tambahkan import untuk library requests
+import pymysql
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
+# Konfigurasi AWS S3
+AWS_REGION = 'ap-southeast-1'
+AWS_ACCESS_KEY_ID = 'AKIAXEVXY4VJ7PJLH4VK'  # Ganti dengan access key Anda
+AWS_SECRET_ACCESS_KEY = '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'  # Ganti dengan secret key Anda
+S3_BUCKET_NAME = 'ecommerce-product-images-shap'
+
+s3 = boto3.client(
+    's3',
+    region_name=AWS_REGION,
+    aws_access_key_id=AWS_ACCESS_KEY_ID,
+    aws_secret_access_key=AWS_SECRET_ACCESS_KEY
+)
 
 # Fungsi untuk koneksi ke database
 def get_db_connection():
@@ -938,20 +955,20 @@ def add_product_form():
                 <div class="form-content">
                     <form action="/add" method="post">
                         <div class="form-group">
-                            <label for="nama_produk" class="form-label">Nama Produk</label>
-                            <input type="text" id="nama_produk" name="nama_produk" class="form-control" required>
+                            <label for="name" class="form-label">Nama Produk</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
                             <p class="form-hint">Masukkan nama produk yang deskriptif (maksimal 100 karakter)</p>
                         </div>
                         
                         <div class="form-group">
-                            <label for="harga" class="form-label">Harga (Rp)</label>
-                            <input type="number" id="harga" name="harga" class="form-control" min="1000" required>
+                            <label for="price" class="form-label">Harga (Rp)</label>
+                            <input type="number" id="price" name="price" class="form-control" min="1000" required>
                             <p class="form-hint">Masukkan harga produk dalam Rupiah (minimal Rp 1.000)</p>
                         </div>
                         
                         <div class="form-group">
-                            <label for="url_gambar" class="form-label">URL Gambar</label>
-                            <input type="url" id="url_gambar" name="url_gambar" class="form-control" required>
+                            <label for="image_url" class="form-label">URL Gambar</label>
+                            <input type="url" id="image_url" name="image_url" class="form-control" required>
                             <p class="form-hint">Masukkan URL gambar produk (direkomendasikan rasio 1:1)</p>
                         </div>
                         
@@ -983,27 +1000,53 @@ def add_product():
     if request.method == 'POST':
         try:
             # Ambil data dari form
-            name = request.form['name']
-            price = float(request.form['price'])
-            image_url = request.form['image_url']
-            
-            # Validasi data
-            if not name or not image_url or price <= 0:
-                return "<h1>Error</h1><p>Semua field harus diisi dengan benar</p>"
-            
-            # Koneksi ke database
+            name = request.form.get('name')
+            price_str = request.form.get('price')
+            image_url = request.form.get('image_url')
+
+            # Validasi form
+            if not name or not image_url or not price_str:
+                return "<h1>Error</h1><p>Semua field harus diisi</p>"
+
+            # Validasi harga
+            try:
+                price = float(price_str)
+                if price <= 0:
+                    return "<h1>Error</h1><p>Harga harus lebih dari 0</p>"
+            except ValueError:
+                return "<h1>Error</h1><p>Harga harus berupa angka yang valid</p>"
+
+            # Upload gambar ke S3
+            s3_image_url = None
+            try:
+                response = requests.get(image_url, stream=True)
+                response.raise_for_status()
+
+                file_extension = ""
+                if '.' in image_url:
+                    file_extension = image_url.split('.')[-1].lower()
+                s3_file_name = f"{uuid.uuid4()}.{file_extension}"
+
+                s3.upload_fileobj(response.raw, S3_BUCKET_NAME, s3_file_name)
+                s3_image_url = f"https://{S3_BUCKET_NAME}.s3.{AWS_REGION}.amazonaws.com/{s3_file_name}"
+
+            except requests.exceptions.RequestException as e:
+                return f"<h1>Error</h1><p>Gagal mengunduh gambar dari URL: {e}</p>"
+            except Exception as e:
+                return f"<h1>Error</h1><p>Gagal mengupload gambar ke S3: {e}</p>"
+
+            # Simpan produk ke database
             db = get_db_connection()
             if not db:
                 return "<h1>Error koneksi database</h1>"
-                
-            # Insert data ke database
+
             cursor = db.cursor()
             sql = "INSERT INTO products (name, price, image_url) VALUES (%s, %s, %s)"
-            cursor.execute(sql, (name, price, image_url))
+            cursor.execute(sql, (name, price, s3_image_url))  # gunakan URL dari S3!
             db.commit()
             cursor.close()
             db.close()
-            
+
             # Redirect ke halaman utama
             return redirect(url_for('home'))
             
@@ -1031,6 +1074,7 @@ def delete_product(id):
         return redirect(url_for('home'))
         
     except Exception as e:
+        #ke,balikan
         return f"<h1>Error</h1><p>{str(e)}</p>"
 
 if __name__ == '__main__':
