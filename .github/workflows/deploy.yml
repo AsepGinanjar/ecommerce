@@ -20,7 +20,7 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-214-211-212 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ec2-user@13.214.211.212 << 'EOF'
             cd /home/ec2-user/Ecommerce
             git pull origin main
             source venv/bin/activate
