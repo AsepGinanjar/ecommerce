@@ -20,15 +20,13 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no  ec2-user@ec2-13-214-211-212 << 'EOF'
+          ssh -o StrictHostKeyChecking=no ec2-user@ec2-13-214-211-212 << 'EOF'
             cd /home/ec2-user/Ecommerce
             git pull origin main
-            npm install
             source venv/bin/activate
             pip install -r requirements.txt
             pkill -f app.py || true
             nohup python app.py &
-
           EOF
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
