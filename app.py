@@ -30,7 +30,7 @@ def home():
             
         cursor = db.cursor()
         # Ambil data produk (termasuk ID untuk delete)
-        cursor.execute("SELECT id, nama_produk, harga, url_gambar FROM produk")
+        cursor.execute("SELECT id, name, price, image_url FROM products")
         products = cursor.fetchall()
         cursor.close()
         db.close()
