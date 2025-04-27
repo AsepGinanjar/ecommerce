@@ -697,7 +697,7 @@ def home():
                         <div class="footer-column">
                             <h3>Kontak</h3>
                             <ul class="footer-links">
-                                <li><i class="fas fa-map-marker-alt"></i> Jl. Siliwangi No. 123, Bandung</li>
+                                <li><i class="fas fa-map-marker-alt"></i> Jl. sekepanjang 3</li>
                                 <li><i class="fas fa-phone"></i> +62 812-3456-7890</li>
                                 <li><i class="fas fa-envelope"></i> info@shop.com</li>
                             </ul>
@@ -705,7 +705,7 @@ def home():
                     </div>
                     
                     <div class="footer-bottom">
-                        <p>&copy; {{ current_year }} AAAAASPEPPPP | Dibuat oleh <span class="developer">{{ developer_name }} ({{ developer_nrp }})</span></p>
+                        <p>&copy; {{ current_year }} Ashap | Dibuat oleh <span class="developer">{{ developer_name }} ({{ developer_nrp }})</span></p>
                     </div>
                 </div>
             </footer>
